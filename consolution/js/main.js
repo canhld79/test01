@@ -1,3 +1,31 @@
+ window.onload = function(){
+        window.onscroll = function() {scrollFunction()};
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("myBtn").style.visibility = "visible";
+            } else {
+                document.getElementById("myBtn").style.visibility = "hidden";
+            }
+        }
+        document.getElementById('myBtn').addEventListener("click", function(){
+            //document.documentElement.scrollTop = 0;
+            requestAnimationFrame(function(){
+                scrollTop(document.documentElement.scrollTop, 10)
+            })
+        });
+
+        function scrollTop(offsetTop, speed){
+            if(offsetTop - speed < 0){
+                // document.getElementById("myBtn").style.display = "none";
+                document.documentElement.scrollTop = 0;
+                return;
+            }
+            setTimeout(() => {
+                document.documentElement.scrollTop = offsetTop - speed;
+                scrollTop(document.documentElement.scrollTop, speed); 
+            }, 1);   
+        }
+    }
  AOS.init({
  	duration: 800,
  	easing: 'slide'
@@ -92,18 +120,19 @@
 		var $this = $(this);
 		// 	 timer;
 		// clearTimeout(timer);
-		$this.addClass('show');
+		// $this.addClass('show');
 		$this.find('> a').attr('aria-expanded', true);
-		// $this.find('.dropdown-menu').addClass('animated-fast fadeInUp show');
-		$this.find('.dropdown-menu').addClass('show');
+		$this.find('.dropdown-menu').addClass('animated-fast fadeInUp show');
+		// $this.find('.dropdown-menu').addClass('show');
 	}, function(){
 		var $this = $(this);
 			// timer;
 		// timer = setTimeout(function(){
-			$this.removeClass('show');
+			// $this.removeClass('show');
 			$this.find('> a').attr('aria-expanded', false);
-			// $this.find('.dropdown-menu').removeClass('animated-fast fadeInUp show');
-			$this.find('.dropdown-menu').removeClass('show');
+			$this.find('.dropdown-menu').removeClass('animated-fast fadeInUp show');
+			
+			// $this.find('.dropdown-menu').removeClass('show');
 		// }, 100);
 	});
 
@@ -255,8 +284,4 @@
 
 	$('.appointment_time').timepicker();
 
-
-
-
 })(jQuery);
-
